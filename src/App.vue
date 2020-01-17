@@ -2,7 +2,7 @@
   <div id="app">
     <Header/>
     <Todos v-bind:todos="todos" v-on:delete-item="deleteItem"/>
-    <CreateTask/>
+    <CreateTask v-on:create-task="createTask"/>
   </div>
 </template>
 
@@ -70,6 +70,9 @@ export default {
   methods: {
     deleteItem(id) {
       this.todos = this.todos.filter(todo => todo.id !== id);
+    },
+    createTask(newTask) {
+      this.todos = [...this.todos, newTask];
     }
   }
 }
