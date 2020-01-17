@@ -28,6 +28,7 @@ export default {
             }
             //
             this.$emit('create-task', newTask);
+            this.title = '';
         }
     }
 }

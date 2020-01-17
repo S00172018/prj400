@@ -4,7 +4,7 @@
    <p id="text"> 
        <input type="checkbox" v-on:change="selected">      
         {{todo.title}}
-        <button @click="$emit('delete-item', todo.id)" class="delete">X</button>
+        <button @click="$emit('delete-item', todo.id)" class="delete">Delete</button>
   </p>
     </div>
 </template>
@@ -47,7 +47,6 @@ export default {
     color: white; 
     border: none;
     padding: 5px 9px;
-    border-radius: 50%;
     cursor: pointer;
     float: right;
 }
