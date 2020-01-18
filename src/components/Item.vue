@@ -26,7 +26,7 @@ export default {
     background: rgb(40, 194, 40);
     padding: 10px;
     border-bottom: 1px;
-    width: 700px;
+    width: 30%;
     height: 50px;
     vertical-align: middle;
     font-weight: bold;

@@ -1,111 +1,40 @@
 <template>
   <div id="app">
     <Header/>
-    <Todos v-bind:todos="todos" v-on:delete-item="deleteItem"/>
-    <CreateTask v-on:create-task="createTask"/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-
-import Header from './components/layout/Header';
-import Todos from './components/Todos';
-import CreateTask from './components/CreateTask';
-
+import Header from './components/layout/Header'
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    Header,
-    Todos,
-    CreateTask
-  },
-  data() {
-    return {
-      todos: [
-        {
-          id: 0,
-          title: 'item 1',
-          completed: false,
-          highPriority: true,
-          selected: false
-        },
-        {
-          id: 2,
-          title: 'item 2',
-          completed: true,
-          highPriority: false,
-          selected: false
-        },
-        {
-          id: 3,
-          title: 'item 3',
-          completed: false,
-          highPriority: false,
-          selected: false
-        },
-        {
-          id: 4,
-          title: 'item 4',
-          completed: false,
-          highPriority: true,
-          selected: false
-        },
-        {
-          id: 5,
-          title: 'item 5',
-          completed: true,
-          highPriority: false,
-          selected: false
-        },
-        {
-          id: 6,
-          title: 'item 6',
-          completed: false,
-          highPriority: false,
-          selected: false
-        }
-      ]
-    }
-  },
-  methods: {
-    deleteItem(id) {
-      this.todos = this.todos.filter(todo => todo.id !== id);
-    },
-    createTask(newTask) {
-      this.todos = [...this.todos, newTask];
-    }
+    Header
   }
+  
 }
 </script>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-h1 {
-  font-weight: bolder;
-  font: 100;
-  padding: 5px;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.4;
-  background: whitesmoke;
-}
-
-.btn {
-  display: inline-block;
-  border: none;
-  background: grey;
-  color: white;
-  padding: 7px 20px;
-  cursor: pointer;
-}
-.btn:hover {
-  background: darkgray;
-}
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.4;
+  }
+  .btn {
+    display: inline-block;
+    border: none;
+    background: #555;
+    color: #fff;
+    padding: 7px 20px;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background: #666;
+  }
 </style>
