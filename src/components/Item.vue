@@ -49,6 +49,7 @@ export default {
     padding: 5px 9px;
     cursor: pointer;
     float: right;
+    font-size: 15px;
 }
 input[type=checkbox] {
     transform: scale(1.5);
