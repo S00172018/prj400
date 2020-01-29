@@ -2,8 +2,8 @@
     <header class="header">
         <h1>PRJ400 Productivity Application</h1>
         <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Task Manager</router-link> |
+      <router-link to="/about">Calendar</router-link>
     </div>
     </header>
 </template>

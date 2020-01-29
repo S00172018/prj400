@@ -1,14 +1,16 @@
 <template>
 <div id="app">
-  
+  <v-app>
+    <v-content>
       <Header/>
       <router-view/>
-    
+      </v-content>
+    </v-app>
   </div>
 </template>
 
 <script>
-import Header from './components/layout/Header'
+import Header from './components/layout/Header';
 
 export default {
   
