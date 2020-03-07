@@ -14,7 +14,6 @@
       :events="calendarEvents"
       :editable="true"
       :droppable="true"
-      @dateClick="handleDateClick"
     />
   </div>
 </template>
@@ -43,21 +42,12 @@ export default {
       ]
     };
   },
+
   methods: {
-    gotoPast() {
-      let calendarApi = this.$refs.fullCalendar.getApi(); // from the ref="..."
-      calendarApi.gotoDate("2000-01-01"); // call a method on the Calendar object
-    },
-    handleDateClick(arg) {
-      if (confirm("Would you like to add an event to " + arg.dateStr + " ?")) {
-        this.calendarEvents.push({
-          // add new event data
-          title: "New Event",
-          start: arg.date,
-          allDay: arg.allDay
-        });
-      }
-    }
+    // gotoPast() {
+    //   let calendarApi = this.$refs.fullCalendar.getApi(); // from the ref="..."
+    //   calendarApi.gotoDate("2000-01-01"); // call a method on the Calendar object
+    // }
   }
 };
 </script>
