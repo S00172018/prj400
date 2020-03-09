@@ -1,29 +1,38 @@
 <template>
-    <header class="header">
-        <h1>PRJ400 Productivity Application</h1>
-        <div id="nav">
-      <router-link to="/">Task Manager</router-link> |
-      <router-link to="/about">Calendar</router-link>
+  <header class="header">
+    <h1>PRJ400 Productivity Application</h1>
+    <div id="nav">
+      <router-link class="link" tag="BIconListCheck" to="/">Task Manager</router-link>
+      <router-link class="link" tag="BIconCalendar" to="/about">Task Manager</router-link>
     </div>
-    </header>
+  </header>
 </template>
 
 <script>
 export default {
-    name: "Header"
-}
+  name: "Header"
+};
 </script>
 
 <style scoped>
 .header {
-    background: rgb(53, 124, 148);
-    color: white;
-    text-align: center;
-    padding: 10px;
+  background: rgb(53, 124, 148);
+  color: white;
+  text-align: center;
+  padding: 10px;
 }
 
 .header a {
-    color: white;
-    padding-right: 5px;
+  color: white;
+  padding-right: 5px;
+}
+
+.link {
+  width: 50px;
+  font-size: 60px;
+}
+
+svg:hover {
+  color: black;
 }
 </style>
