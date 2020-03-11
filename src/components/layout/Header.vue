@@ -48,4 +48,8 @@ export default {
 svg:hover {
   color: black;
 }
+
+svg:active {
+  color: gold;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="Home">
+  <div class="container" align="center">
     <Todos v-bind:todos="todos" v-on:delete-item="deleteItem"/>
     <CreateTask v-on:create-task="createTask"/>
   </div>
@@ -21,42 +21,42 @@ export default {
       todos: [
         {
           id: 0,
-          title: 'item 1',
+          title: 'Secure Software Assignment 2',
           completed: false,
           highPriority: true,
           selected: false
         },
         {
           id: 2,
-          title: 'item 2',
+          title: 'Maths Exam',
           completed: true,
           highPriority: false,
           selected: false
         },
         {
           id: 3,
-          title: 'item 3',
+          title: 'Web Development Quiz',
           completed: false,
           highPriority: false,
           selected: false
         },
         {
           id: 4,
-          title: 'item 4',
+          title: 'PRJ400 Meeting',
           completed: false,
           highPriority: true,
           selected: false
         },
         {
           id: 5,
-          title: 'item 5',
+          title: 'Physics Homework',
           completed: true,
           highPriority: false,
           selected: false
         },
         {
           id: 6,
-          title: 'item 6',
+          title: 'Software Testing CA 1',
           completed: false,
           highPriority: false,
           selected: false
@@ -80,6 +80,7 @@ export default {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  align-content: center;
 }
 
 h1 {

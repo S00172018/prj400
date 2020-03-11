@@ -1,10 +1,10 @@
 <template>
-    <div class="task" v-bind:class="{'task-complete':todo.completed,
+    <div class="task" align="left" v-bind:class="{'task-complete':todo.completed,
     'task-priority':todo.highPriority, 'selected':todo.selected}">
    <p id="text"> 
        <input type="checkbox" v-on:change="selected">      
         {{todo.title}}
-        <button @click="$emit('delete-item', todo.id)" class="delete">Delete</button>
+        <!-- <button @click="$emit('delete-item', todo.id)" class="delete">Delete</button> -->
   </p>
     </div>
 </template>
@@ -25,12 +25,12 @@ export default {
 .task {
     background: rgb(40, 194, 40);
     padding: 10px;
-    border-bottom: 1px;
     width: 30%;
     height: 50px;
     vertical-align: middle;
     font-weight: bold;
     font-size: 20px;
+    align-content: left;
 
 }
 .task-complete {
@@ -42,7 +42,7 @@ export default {
 .selected {
     background: lightgray; 
 }
-.delete {
+/* .delete {
     background: red;;
     color: white; 
     border: none;
@@ -50,7 +50,7 @@ export default {
     cursor: pointer;
     float: right;
     font-size: 15px;
-}
+} */
 input[type=checkbox] {
     transform: scale(1.5);
 }
