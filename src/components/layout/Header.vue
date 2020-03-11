@@ -9,6 +9,19 @@
 </template>
 
 <script>
+import Vue from "vue";
+import {
+  BootstrapVue,
+  BIcon,
+  BIconCalendar,
+  BIconListCheck
+} from "bootstrap-vue";
+
+Vue.use(BootstrapVue);
+Vue.component("BIcon", BIcon);
+Vue.component("BIconCalendar", BIconCalendar);
+Vue.component("BIconListCheck", BIconListCheck);
+
 export default {
   name: "Header"
 };

@@ -4,6 +4,7 @@
       class="demo-app-calendar"
       ref="fullCalendar"
       defaultView="timeGridWeek"
+      eventTextColor="white"
       :header="{
         left: 'prev,next today',
         center: 'title',
@@ -67,4 +68,7 @@ export default {
   margin: 0 auto;
   max-width: 900px;
 }
+calendarEvents {
+  color: white;
+  }
 </style>

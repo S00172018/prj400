@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Task Manager</h1>
-        <div v-bind:key="todo.id" v-for="todo in todos">
+        <div class="listy" v-bind:key="todo.id" v-for="todo in todos">
             <TodoItem v-bind:todo="todo" v-on:delete-item="$emit('delete-item', todo.id)"/>
         </div>
     </div>
@@ -20,5 +20,6 @@ export default {
 </script>
 
 <style scoped>
+
 
 </style>

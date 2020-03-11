@@ -11,25 +11,11 @@
 
 <script>
 import Header from "./components/layout/Header";
-import Vue from "vue";
-import {
-  BootstrapVue,
-  BIcon,
-  BIconCalendar,
-  BIconListCheck
-} from "bootstrap-vue";
-
-Vue.use(BootstrapVue);
-Vue.component("BIcon", BIcon);
-Vue.component("BIconCalendar", BIconCalendar);
-Vue.component("BIconListCheck", BIconListCheck);
 
 export default {
   name: "app",
   components: {
-    Header,
-    BootstrapVue,
-    BIcon
+    Header
   },
 
   data: () => ({
