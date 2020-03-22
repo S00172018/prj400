@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { db } from "@/main"
 import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -44,12 +45,20 @@ export default {
     };
   },
 
+mounted() {
+  this.getEvents();
+},
+
   methods: {
-    // gotoPast() {
-    //   let calendarApi = this.$refs.fullCalendar.getApi(); // from the ref="..."
-    //   calendarApi.gotoDate("2000-01-01"); // call a method on the Calendar object
-    // }
-  }
+     getEvents() {
+     db.collection("task list").get().then(function(querySnapshot) {
+     querySnapshot.forEach(function(doc) {
+         // doc.data() is never undefined for query doc snapshots
+         console.log(doc.id, " => ", doc.data());
+     });
+ });
+     }
+  },
 };
 </script>
 
