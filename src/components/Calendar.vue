@@ -15,6 +15,12 @@
       :events="calendarEvents"
       :editable="true"
       :droppable="true"
+      :activator="selectedElement"
+      @eventDrop="updateEvent(selectedEvent)"
+      @eventResize="updateEvent(selectedEvent)"
+      @eventClick="eventClick"
+
+      @click:event="showEvent"
     />
   </div>
 </template>
@@ -29,8 +35,7 @@ export default {
   components: {
     FullCalendar // make the <FullCalendar> tag available
   },
-  data: function() {
-    return {
+  data: () => ({ 
       calendarPlugins: [
         // plugins must be defined in the JS
         dayGridPlugin,
@@ -38,26 +43,52 @@ export default {
         interactionPlugin // needed for dateClick
       ],
       calendarWeekends: true,
-      calendarEvents: [
-        // initial event data
-        { title: "Event Now", start: new Date() }
-      ]
-    };
-  },
+      calendarEvents: [],
+
+      title: null,
+      start: null,
+      end: null,
+      selectedEvent: {},
+      selectedElement: null,
+      currentlyEditing: null,
+
+      eventClick (arg) {
+                console.log(arg.event.id);
+            }
+  
+  }),
 
 mounted() {
   this.getEvents();
 },
 
   methods: {
-     getEvents() {
-     db.collection("task list").get().then(function(querySnapshot) {
-     querySnapshot.forEach(function(doc) {
-         // doc.data() is never undefined for query doc snapshots
-         console.log(doc.id, " => ", doc.data());
-     });
- });
-     }
+    async getEvents () {
+      let snapshot = await db.collection('task list').get()
+      const calendarEvents = []
+      snapshot.forEach(doc => {
+        let appData = doc.data()
+        appData.id = doc.id
+        calendarEvents.push(appData)
+        console.log(doc.id, " => ", doc.data());
+      })
+      this.calendarEvents = calendarEvents
+     },
+
+     async updateEvent (ev) {
+
+      await db.collection('task list').doc("oiZ17Ot0hXpR5iIeJWiH").update({
+        start: ev.start,
+        end: ev.end
+      })
+      this.selectedOpen = false,
+      this.currentlyEditing = null
+    },
+
+    eventClick (event) {
+      this.selectedEvent = event
+    },
+     
   },
 };
 </script>

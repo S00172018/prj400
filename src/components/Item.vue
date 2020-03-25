@@ -1,5 +1,5 @@
 <template>
-    <div class="task" align="left" v-bind:class="{'task-complete':todo.completed,
+    <div class="card" align="left" v-bind:class="{'task-complete':todo.completed,
     'task-priority':todo.highPriority, 'selected':todo.selected}">
    <p id="text"> 
        <input type="checkbox" v-on:change="selected">      
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style scoped>
-.task {
+.card {
     background: rgb(40, 194, 40);
     padding: 10px;
     width: 30%;

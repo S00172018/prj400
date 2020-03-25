@@ -1,16 +1,28 @@
 <template>
     <div>
-        <form @submit="createTask">
+        <form @submit="addEvent">
             <input type=text name="title" v-model="title" placeholder="Create Task" class="textbox">
-                <p>High Priority</p>
-                <input type="checkbox" name="priority" v-model="toggle" true-value="yes">
+                <b-form-datepicker id="example-datepicker" v-model="start" class="mb-2"></b-form-datepicker>
+                    <p>High Priority</p>
+                    <input type="checkbox" name="priority" v-model="toggle" true-value="yes">
             <input type="submit" value="Submit" class="btn">
         </form>
     </div>
 </template>
 
 <script>
+import Vue from "vue";
+import { FormDatepickerPlugin } from 'bootstrap-vue'
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+import { db } from "@/main"
+
 import uuid from 'uuid';
+
+Vue.use(FormDatepickerPlugin)
+
 export default {
     name: "CreateTask",
     data() {
@@ -31,33 +43,24 @@ export default {
             //
             this.$emit('create-task', newTask);
             this.title = '';
-        }
+        },
+
+         async addEvent () {
+      if (this.title && this.start) {
+        await db.collection("task list").add({
+          title: this.title,
+          start: this.start,
+        })
+      }
+         }
     }
 }
 </script>
 
 <style scoped>
-p {
-    padding-right: 5px;
+* {
+    display: inline-block;
 }
 
-form {
-    display: flex;
-}
-input[type="text"] {
-    flex: 10;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-input[type="submit"] {
-    flex: 1;
-}
-input[type="checkbox"] {
-    flex: 1;
-    padding-right: 5px;
-}
-div {
-    width: 500px;
-   padding-top: 50px;
-}
+
 </style>

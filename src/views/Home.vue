@@ -1,12 +1,13 @@
 <template>
   <div class="container" align="center">
-    <Todos v-bind:todos="todos" v-on:delete-item="deleteItem"/>
+    <h1>Task Manager</h1>
     <CreateTask v-on:create-task="createTask"/>
+    <h2>Tasks</h2>
+    <Todos v-bind:todos="todos" v-on:delete-item="deleteItem"/>
   </div>
 </template>
 
 <script>
-
 import Todos from '../components/Todos';
 import CreateTask from '../components/CreateTask';
 
@@ -76,17 +77,11 @@ export default {
 </script>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  align-content: center;
-}
+
 
 h1 {
   font-weight: bolder;
   font: 100;
-  padding: 5px;
 }
 
 body {
@@ -106,4 +101,5 @@ body {
 .btn:hover {
   background: darkgray;
 }
+
 </style>
