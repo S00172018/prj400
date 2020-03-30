@@ -26,11 +26,16 @@
 </template>
 
 <script>
+import Vue from "vue";
 import { db } from "@/main"
+import moment from 'moment';
 import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+
+Vue.use(moment);
+
 export default {
   components: {
     FullCalendar // make the <FullCalendar> tag available
@@ -75,13 +80,16 @@ mounted() {
         console.log(arg.event.start)
         var start = arg.event.start
         console.log(start.getUTCHours());
+
+        var newStart = moment(start).format();
+        console.log(newStart)
         
      },
 
      async updateEvent (arg) {
 
       await db.collection('task list').doc(arg.event.id).update({
-        start: arg.event.start
+        start: moment(arg.event.start).format()
       })
       console.log("The ID is " + arg.event.id + "and the start is " + arg.event.start);
     },
