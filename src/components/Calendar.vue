@@ -16,11 +16,11 @@
       :editable="true"
       :droppable="true"
       :activator="selectedElement"
-      @eventDrop="updateEvent(selectedEvent)"
-      @eventResize="updateEvent(selectedEvent)"
+      @eventDrop="updateEvent"
+      @eventResize="updateEvent"
+
       @eventClick="eventClick"
 
-      @click:event="showEvent"
     />
   </div>
 </template>
@@ -51,10 +51,6 @@ export default {
       selectedEvent: {},
       selectedElement: null,
       currentlyEditing: null,
-
-      eventClick (arg) {
-                console.log(arg.event.id);
-            }
   
   }),
 
@@ -75,18 +71,19 @@ mounted() {
       this.calendarEvents = calendarEvents
      },
 
-     async updateEvent (ev) {
+     eventClick(arg) {
+        console.log(arg.event.start)
+        var start = arg.event.start
+        console.log(start.getUTCHours());
+        
+     },
 
-      await db.collection('task list').doc("oiZ17Ot0hXpR5iIeJWiH").update({
-        start: ev.start,
-        end: ev.end
+     async updateEvent (arg) {
+
+      await db.collection('task list').doc(arg.event.id).update({
+        start: arg.event.start
       })
-      this.selectedOpen = false,
-      this.currentlyEditing = null
-    },
-
-    eventClick (event) {
-      this.selectedEvent = event
+      console.log("The ID is " + arg.event.id + "and the start is " + arg.event.start);
     },
      
   },
