@@ -1,7 +1,7 @@
 <template>
     <div>
         <form @submit="addEvent">
-            <input type=text name="title" v-model="title" placeholder="Create Task" class="textbox">
+            <b-form-input type=text name="title" v-model="title" placeholder="Create Task" class="textbox"></b-form-input>
                 <b-form-datepicker id="example-datepicker" v-model="start" class="mb-2"></b-form-datepicker>
                     <p>High Priority</p>
                     <input type="checkbox" name="priority" v-model="toggle" true-value="yes">
@@ -13,6 +13,7 @@
 <script>
 import Vue from "vue";
 import { FormDatepickerPlugin } from 'bootstrap-vue'
+import { FormInputPlugin } from 'bootstrap-vue'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -20,6 +21,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { db } from "@/main"
 
 Vue.use(FormDatepickerPlugin)
+Vue.use(FormInputPlugin)
 
 export default {
     name: "CreateTask",
