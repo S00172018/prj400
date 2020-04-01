@@ -10,6 +10,8 @@
 </template>
 
 <script>
+
+
 export default {
     name:"TodoItem",
     props:["todo"],
@@ -22,7 +24,7 @@ export default {
 </script>
 
 <style scoped>
-.card {
+/* .card {
     background: rgb(40, 194, 40);
     padding: 10px;
     width: 30%;
@@ -41,7 +43,7 @@ export default {
 }
 .selected {
     background: lightgray; 
-}
+} */
 /* .delete {
     background: red;;
     color: white; 
@@ -51,10 +53,10 @@ export default {
     float: right;
     font-size: 15px;
 } */
-input[type=checkbox] {
+/* input[type=checkbox] {
     transform: scale(1.5);
 }
 #text {
     padding: 0px;
-}
+} */
 </style>

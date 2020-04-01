@@ -19,8 +19,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import { db } from "@/main"
 
-import uuid from 'uuid';
-
 Vue.use(FormDatepickerPlugin)
 
 export default {
@@ -31,20 +29,6 @@ export default {
         }
     },
     methods: {
-        createTask(e) {
-            e.preventDefault();
-            const newTask = {
-                id: uuid.v4(),
-                title: this.title,
-                selected: false,
-                highPriority: this.toggle,
-                completed: false
-            }
-            //
-            this.$emit('create-task', newTask);
-            this.title = '';
-        },
-
          async addEvent () {
       if (this.title && this.start) {
         await db.collection("task list").add({

@@ -23,8 +23,9 @@ Vue.component("BIconCalendar", BIconCalendar);
 Vue.component("BIconListCheck", BIconListCheck);
 
 export default {
-  name: "Header"
-};
+  name: "Header",
+
+}
 </script>
 
 <style scoped>

@@ -89,7 +89,8 @@ mounted() {
      async updateEvent (arg) {
 
       await db.collection('task list').doc(arg.event.id).update({
-        start: moment(arg.event.start).format()
+        start: moment(arg.event.start).format(),
+        end: moment(arg.event.end).format()
       })
       console.log("The ID is " + arg.event.id + "and the start is " + arg.event.start);
     },
