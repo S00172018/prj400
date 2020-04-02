@@ -2,9 +2,10 @@
     <div>
         <form @submit="addEvent">
             <b-form-input type=text name="title" v-model="title" placeholder="Create Task" class="textbox"></b-form-input>
-                <b-form-datepicker id="example-datepicker" v-model="start" class="mb-2"></b-form-datepicker>
-                    <p>High Priority</p>
-                    <input type="checkbox" name="priority" v-model="toggle" true-value="yes">
+                <b-form-datepicker id="example-datepicker" v-model="start" class="mb-2"></b-form-datepicker>                  
+                    <b-form-checkbox size="lg" type="checkbox" name="priority" class="float-right" v-model="toggle" true-value="yes">
+                        High Priority
+                    </b-form-checkbox>
             <input type="submit" value="Submit" class="btn">
         </form>
     </div>
@@ -45,8 +46,7 @@ export default {
 
 <style scoped>
 * {
-    display: inline-block;
+    width: 70%;
 }
-
 
 </style>

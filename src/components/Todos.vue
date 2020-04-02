@@ -2,8 +2,9 @@
     <div>
         <b-list-group class="listy" v-bind:key="task.id" v-for="task in tasks">
             <b-list-group-item variant="secondary" v-bind:tasks="task"> 
-                {{task.title}}
+                {{task.title}} │ {{task.start}} 
                 <b-badge variant="primary" pill>...</b-badge>
+                <b-button class="float-right" pill variant="outline-danger" size="sm" v-on:click="deleteEvent(task.id)">Delete</b-button>
             </b-list-group-item> 
         </b-list-group>
     </div>
@@ -13,7 +14,15 @@
 import Vue from "vue";
 import { db } from "@/main"
 import { ListGroupPlugin } from 'bootstrap-vue'
+import moment from 'moment';
+import { ButtonPlugin } from 'bootstrap-vue'
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 Vue.use(ListGroupPlugin)
+Vue.use(moment);
+Vue.use(ButtonPlugin)
 
 export default {
   name: "Todos",
@@ -39,11 +48,17 @@ export default {
         console.log(doc.id, " => ", doc.data());
       })
       this.tasks = tasks
-     }
+     },
+
+     async deleteEvent (event) {
+      await db.collection("task list").doc(event).delete()
+      this.getEvents()
+    }
   }
 }
 </script>
 
 <style scoped>
+
 
 </style>
