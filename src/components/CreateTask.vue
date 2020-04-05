@@ -3,7 +3,7 @@
         <form @submit="addEvent">
             <b-form-input type=text name="title" v-model="title" placeholder="Create Task" class="textbox"></b-form-input>
                 <b-form-datepicker id="example-datepicker" v-model="start" class="mb-2"></b-form-datepicker>                  
-                    <b-form-checkbox size="lg" type="checkbox" name="priority" class="float-right" v-model="toggle" true-value="yes">
+                    <b-form-checkbox size="lg" type="checkbox" name="priority" v-model="priority" true-value="yes">
                         High Priority
                     </b-form-checkbox>
             <input type="submit" value="Submit" class="btn">
@@ -31,12 +31,22 @@ export default {
         title: ''
         }
     },
+
+mounted() {
+  this.priority = false;
+  console.log(this.priority)
+},
+
     methods: {
          async addEvent () {
       if (this.title && this.start) {
+          if (this.priority) {
+              this.priority = "red"
+          }
         await db.collection("task list").add({
           title: this.title,
           start: this.start,
+          backgroundColor: this.priority
         })
       }
          }

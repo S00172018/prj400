@@ -5,6 +5,11 @@
       ref="fullCalendar"
       defaultView="timeGridWeek"
       eventTextColor="white"
+   
+
+
+
+      
       :header="{
         left: 'prev,next today',
         center: 'title',
@@ -18,6 +23,7 @@
       :activator="selectedElement"
       @eventDrop="updateEvent"
       @eventResize="updateEvent"
+      @eventReceive="updateEvent"
 
       @eventClick="eventClick"
 
@@ -56,6 +62,11 @@ export default {
       selectedEvent: {},
       selectedElement: null,
       currentlyEditing: null,
+
+      dropAccept: '.div.list-group-item',
+      drop: function() {
+      console.log('div.list-group-item');
+    }
   
   }),
 
@@ -94,6 +105,11 @@ mounted() {
       })
       console.log("The ID is " + arg.event.id + "and the start is " + arg.event.start);
     },
+
+    getColour(event) {
+      if (event.priority == true)
+      return "red"
+    }
      
   },
 };

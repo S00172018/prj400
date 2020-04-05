@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-list-group class="listy" v-bind:key="task.id" v-for="task in tasks">
-            <b-list-group-item variant="secondary" v-bind:tasks="task"> 
+            <b-list-group-item v-bind:tasks="task" :variant=colour(task)> 
                 {{task.title}} │ {{task.start}} 
                 <b-badge variant="primary" pill>...</b-badge>
                 <b-button class="float-right" pill variant="outline-danger" size="sm" v-on:click="deleteEvent(task.id)">Delete</b-button>
@@ -53,12 +53,24 @@ export default {
      async deleteEvent (event) {
       await db.collection("task list").doc(event).delete()
       this.getEvents()
+    },
+
+    colour(task) {
+
+if (task.backgroundColor == "red") {
+
+        return "danger"  
+}   
+
+else return "secondary"
     }
   }
 }
 </script>
 
 <style scoped>
-
+.task-priority {
+    background: orange;   
+}
 
 </style>
