@@ -2,7 +2,7 @@
     <div>
         <b-list-group class="listy" v-bind:key="task.id" v-for="task in tasks">
             <b-list-group-item v-bind:tasks="task" :variant=colour(task)> 
-                {{task.title}} │ {{task.start}} 
+                {{task.title}} │ {{task.start.substring(0,10)}} 
                 <b-badge variant="primary" pill>...</b-badge>
                 <b-button class="float-right" pill variant="outline-danger" size="sm" v-on:click="deleteEvent(task.id)">Delete</b-button>
             </b-list-group-item> 
