@@ -1,11 +1,24 @@
 <template>
     <div>
         <form @submit="addEvent">
-            <b-form-input type=text name="title" v-model="title" placeholder="Create Task" class="textbox"></b-form-input>
-                <b-form-datepicker id="example-datepicker" v-model="start" class="mb-2"></b-form-datepicker>                  
-                    <b-form-checkbox size="lg" type="checkbox" name="priority" v-model="priority" true-value="yes">
-                        High Priority
-                    </b-form-checkbox>
+            <label for="titleBox">Title and Date (Required)</label>
+            <b-form-input id="titleBox" type=text name="title" v-model="title" placeholder="Create Task" class="textbox"></b-form-input>
+                <b-form-datepicker id="example-datepicker" v-model="start" class="mb-2"></b-form-datepicker>   
+                    <b-container class="bv-example-row">
+                        <b-row>
+                            <b-col>
+                                <label for="timePickerStart">Start</label>
+                                <b-form-timepicker class="timePick" id="timePickerStart" v-model="startTime" locale="en"></b-form-timepicker> 
+                            </b-col>
+                            <b-col>
+                                <label for="timePickerEnd">End</label>
+                                <b-form-timepicker class="timePick" id="timePickerEnd" v-model="endTime" locale="en"></b-form-timepicker>  
+                            </b-col>
+                        </b-row>
+                    </b-container>
+                <b-form-checkbox class="pri" size="lg" type="checkbox" name="priority" v-model="priority" true-value="yes">
+                    High Priority
+                </b-form-checkbox>
             <input type="submit" value="Submit" class="btn">
         </form>
     </div>
@@ -15,6 +28,7 @@
 import Vue from "vue";
 import { FormDatepickerPlugin } from 'bootstrap-vue'
 import { FormInputPlugin } from 'bootstrap-vue'
+import { FormTimepickerPlugin } from 'bootstrap-vue'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -23,6 +37,7 @@ import { db } from "@/main"
 
 Vue.use(FormDatepickerPlugin)
 Vue.use(FormInputPlugin)
+Vue.use(FormTimepickerPlugin)
 
 export default {
     name: "CreateTask",
@@ -40,12 +55,21 @@ mounted() {
     methods: {
          async addEvent () {
       if (this.title && this.start) {
+          if (this.startTime && this.endTime)
+          {
+              console.log("THIS IS THE TIME" + this.startTime)
+
+              this.start = this.start.substring(0,11) + "T" + this.startTime
+              this.endTime = this.start.substring(0,11) + this.endTime
+              
+          }
           if (this.priority) {
               this.priority = "red"
           }
         await db.collection("task list").add({
           title: this.title,
           start: this.start,
+          end: this.endTime,
           backgroundColor: this.priority
         })
       }
@@ -55,8 +79,31 @@ mounted() {
 </script>
 
 <style scoped>
-* {
-    width: 70%;
+
+
+.textbox {
+    width: 30%;
+    padding: 0px;
 }
+
+.mb-2 {
+    width: 30%;
+    padding: 0px;
+}
+
+.bv-example-row {
+    width: 40%;
+    padding: 0px;
+}
+
+.pri {
+    padding-bottom: 10px;
+}
+
+.btn {
+
+    
+}
+
 
 </style>
