@@ -1,5 +1,8 @@
 <template>
     <div>
+        <b-button v-b-modal.modal-1>Create Task</b-button>
+        <b-modal id="modal-1" title="Create Task" ok-only hide-footer="true">
+  
         <form @submit="addEvent">
             <label for="titleBox">Title and Date (Required)</label>
             <b-form-input id="titleBox" type=text name="title" v-model="title" placeholder="Create Task" class="textbox"></b-form-input>
@@ -19,8 +22,9 @@
                 <b-form-checkbox class="pri" size="lg" type="checkbox" name="priority" v-model="priority" true-value="yes">
                     High Priority
                 </b-form-checkbox>
-            <input type="submit" value="Submit" class="btn">
+            <input id="subBtn" type="submit" value="Submit" class="btn">
         </form>
+        </b-modal>
     </div>
 </template>
 
@@ -29,6 +33,7 @@ import Vue from "vue";
 import { FormDatepickerPlugin } from 'bootstrap-vue'
 import { FormInputPlugin } from 'bootstrap-vue'
 import { FormTimepickerPlugin } from 'bootstrap-vue'
+import { ModalPlugin } from 'bootstrap-vue'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -38,6 +43,7 @@ import { db } from "@/main"
 Vue.use(FormDatepickerPlugin)
 Vue.use(FormInputPlugin)
 Vue.use(FormTimepickerPlugin)
+Vue.use(ModalPlugin)
 
 export default {
     name: "CreateTask",
@@ -80,30 +86,12 @@ mounted() {
 
 <style scoped>
 
-
-.textbox {
-    width: 30%;
-    padding: 0px;
-}
-
-.mb-2 {
-    width: 30%;
-    padding: 0px;
-}
-
-.bv-example-row {
+#subBtn {
     width: 40%;
-    padding: 0px;
+margin-left: 30%;
+margin-right: 30%
 }
 
-.pri {
-    padding-bottom: 10px;
-}
-
-.btn {
-
-    
-}
 
 
 </style>
