@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-button v-b-modal.modal-1>Create Task</b-button>
+        <b-button v-b-modal.modal-1>Create Event</b-button>
         <b-modal id="modal-1" title="Create Task" ok-only hide-footer="true">
   
         <form @submit="addEvent">
@@ -56,22 +56,24 @@ export default {
 mounted() {
   this.priority = false;
   console.log(this.priority)
+
+  this.startTime = "00:00:00"
+  this.endTime = "00:00:00"
 },
 
     methods: {
          async addEvent () {
-      if (this.title && this.start) {
-          if (this.startTime && this.endTime)
-          {
-              console.log("THIS IS THE TIME" + this.startTime)
-
+ 
               this.start = this.start.substring(0,11) + "T" + this.startTime
-              this.endTime = this.start.substring(0,11) + this.endTime
-              
-          }
+              this.endTime = this.start.substring(0,11) + this.endTime 
+
+              console.log("start is " + this.start)
+              console.log("end is " + this.endTime)
+    
           if (this.priority) {
               this.priority = "red"
           }
+
         await db.collection("task list").add({
           title: this.title,
           start: this.start,
@@ -81,7 +83,6 @@ mounted() {
       }
          }
     }
-}
 </script>
 
 <style scoped>

@@ -1,8 +1,8 @@
 <template>
   <div class="container" align="center">
-    <h1>Task Manager</h1>
+    <h1>Event Manager</h1>
     <CreateTask v-on:create-task="createTask"/>
-    <h2>Tasks</h2>
+    <h2>Events</h2>
     <Todos v-bind:todos="todos" v-on:delete-item="deleteItem"/>
   </div>
 </template>
