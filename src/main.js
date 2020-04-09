@@ -22,8 +22,14 @@ firebase.initializeApp(
 
 export const db = firebase.firestore();
 
-new Vue({
-  router,
+let app;
+firebase.auth().onAuthStateChanged(() => {
+  if (!app) {
+    /* eslint-disable no-new */
+    app = new Vue({
+      router,
   vuetify,
   render: h => h(App)
 }).$mount("#app");
+  }
+});

@@ -63,12 +63,16 @@ mounted() {
 
     methods: {
          async addEvent () {
- 
+
+             if (this.start && this.endTime) {
+              
               this.start = this.start.substring(0,11) + "T" + this.startTime
               this.endTime = this.start.substring(0,11) + this.endTime 
 
               console.log("start is " + this.start)
               console.log("end is " + this.endTime)
+
+             }
     
           if (this.priority) {
               this.priority = "red"
