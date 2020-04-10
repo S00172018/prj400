@@ -22,6 +22,7 @@
 <script>
 import Calendar from '../components/Calendar'
 import { db } from "@/main"
+import firebase from 'firebase';
 import draggable from 'vuedraggable';
 
 export default {
@@ -41,7 +42,7 @@ export default {
 
   methods: {
       async getEvents () {
-      let snapshot = await db.collection('task list').get()
+      let snapshot = await db.collection(firebase.auth().currentUser.email).get()
       const tasks = []
       snapshot.forEach(doc => {
         let appData = doc.data()

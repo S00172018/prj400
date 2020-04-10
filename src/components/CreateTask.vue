@@ -30,6 +30,7 @@
 
 <script>
 import Vue from "vue";
+import firebase from 'firebase';
 import { FormDatepickerPlugin } from 'bootstrap-vue'
 import { FormInputPlugin } from 'bootstrap-vue'
 import { FormTimepickerPlugin } from 'bootstrap-vue'
@@ -53,12 +54,22 @@ export default {
         }
     },
 
+   created() {
+    if (firebase.auth().currentUser) {
+      this.isLoggedIn = true;
+      this.currentUser = firebase.auth().currentUser.email;
+    }
+  }, 
+
 mounted() {
   this.priority = false;
   console.log(this.priority)
 
   this.startTime = "00:00:00"
   this.endTime = "00:00:00"
+
+
+  console.log(this.currentUser)
 },
 
     methods: {
@@ -78,7 +89,7 @@ mounted() {
               this.priority = "red"
           }
 
-        await db.collection("task list").add({
+         db.collection(firebase.auth().currentUser.email).add({
           title: this.title,
           start: this.start,
           end: this.endTime,

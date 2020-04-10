@@ -33,6 +33,7 @@
 
 <script>
 import Vue from "vue";
+import firebase from 'firebase';
 import { db } from "@/main"
 import moment from 'moment';
 import FullCalendar from "@fullcalendar/vue";
@@ -76,7 +77,7 @@ mounted() {
 
   methods: {
     async getEvents () {
-      let snapshot = await db.collection('task list').get()
+      let snapshot = await db.collection(firebase.auth().currentUser.email).get()
       const calendarEvents = []
       snapshot.forEach(doc => {
         let appData = doc.data()
@@ -99,7 +100,7 @@ mounted() {
 
      async updateEvent (arg) {
 
-      await db.collection('task list').doc(arg.event.id).update({
+      await db.collection(firebase.auth().currentUser.email).doc(arg.event.id).update({
         start: moment(arg.event.start).format(),
         end: moment(arg.event.end).format()
       })

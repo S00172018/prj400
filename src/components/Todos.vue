@@ -12,6 +12,7 @@
 
 <script>
 import Vue from "vue";
+import firebase from 'firebase';
 import { db } from "@/main"
 import { ListGroupPlugin } from 'bootstrap-vue'
 import moment from 'moment';
@@ -39,7 +40,7 @@ export default {
 
   methods: {
       async getEvents () {
-      let snapshot = await db.collection('task list').get()
+      let snapshot = await db.collection(firebase.auth().currentUser.email).get()
       const tasks = []
       snapshot.forEach(doc => {
         let appData = doc.data()
