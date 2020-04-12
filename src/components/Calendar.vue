@@ -4,12 +4,7 @@
       class="demo-app-calendar"
       ref="fullCalendar"
       defaultView="timeGridWeek"
-      eventTextColor="white"
-   
-
-
-
-      
+      eventTextColor="white"     
       :header="{
         left: 'prev,next today',
         center: 'title',

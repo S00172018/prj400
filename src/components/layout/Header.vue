@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <h1>PRJ400 Productivity Application</h1>
+    <h1>PRJ400 Virtual Planner</h1>
     <div id="nav">
       <router-link class="link" tag="BIconListCheck" to="/">Task Manager</router-link>
       <router-link class="link" tag="BIconCalendar" to="/about">Task Manager</router-link>

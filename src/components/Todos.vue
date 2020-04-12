@@ -52,7 +52,7 @@ export default {
      },
 
      async deleteEvent (event) {
-      await db.collection("task list").doc(event).delete()
+      await db.collection(firebase.auth().currentUser.email).doc(event).delete()
       this.getEvents()
     },
 
