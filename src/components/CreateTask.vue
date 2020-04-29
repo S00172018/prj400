@@ -93,6 +93,7 @@ mounted() {
           title: this.title,
           start: this.start,
           end: this.endTime,
+          description: 'hello',
           backgroundColor: this.priority
         })
       }
@@ -105,8 +106,9 @@ mounted() {
 #subBtn {
     width: 40%;
 margin-left: 30%;
-margin-right: 30%
+margin-right: 30%;
 }
+
 
 
 
