@@ -1,21 +1,21 @@
 <template>
     <div>
-      <div>
+
        <b-modal id="modal-2" title="Edit Event" ok-only hide-footer="true">
-        <form @submit="updateEvent(selectedTask)">
+        <form @submit="updateEvent()">
             <label for="titleBox">Title</label>
             <b-form-input id="titleBox" type=text name="title" v-model="title" class="text"></b-form-input>
                 
             <input id="subBtn" type="submit" value="Update" class="btn">
         </form>
         </b-modal>
-        </div>
+        
 
         <b-list-group class="listy" v-bind:key="task.id" v-for="task in tasks">
             <b-list-group-item v-bind:tasks="task" :variant=colour(task)> 
                 {{task.title}} │ {{task.start.substring(0,10)}}    
                 <b-button class="float-right" pill variant="outline-danger" size="sm" v-on:click="deleteEvent(task.id)">Delete</b-button>
-                <b-button class="float-right" pill variant="outline-danger" size="sm" v-on:click="sendInfo(task)" v-b-modal.modal-2>Edit Event</b-button>
+                <b-button class="float-right" pill variant="outline-danger" size="sm" v-on:click="sendInfo(task.id)" v-b-modal.modal-2>Edit Event</b-button>
             </b-list-group-item> 
         </b-list-group>
 
@@ -46,6 +46,7 @@ export default {
 
   data: () => ({  
       tasks: [],
+      selectedTask: null
   }),
 
   mounted() {
@@ -72,17 +73,17 @@ export default {
       this.getEvents()
     },
 
-     async updateEvent (event) {
-      await db.collection(firebase.auth().currentUser.email).doc(event.id).update({
+     sendInfo(task) {
+        this.selectedTask = task;
+        console.log(this.selectedTask);
+    },
+
+     async updateEvent () {
+      await db.collection(firebase.auth().currentUser.email).doc(this.selectedTask).update({
         title: this.title
       })
       this.getEvents();
      },
-
-    sendInfo(task) {
-        this.selectedTask = task;
-        console.log(this.selectedTask);
-    },
 
     colour(task) {
 
