@@ -5,11 +5,7 @@
             <b-list-group-item v-bind:tasks="task" :variant=colour(task)> 
                 {{task.title}} │ {{task.start.substring(0,10)}}    
                 <b-button class="float-right" pill variant="outline-danger" size="sm" v-on:click="deleteEvent(task.id)">Delete</b-button>
-                <b-button class="float-right" pill variant="outline-danger" size="sm" v-on:click="sendInfo(task.id)" v-b-modal.modal-2>Edit Event</b-button>
-
-
-
-                
+                <b-button class="float-right" pill variant="outline-danger" size="sm" v-on:click="sendInfo(task.id)" v-b-modal.modal-2>Edit Event</b-button>     
             </b-list-group-item> 
         </b-list-group>
 
@@ -79,9 +75,8 @@ export default {
     },
 
      async updateEvent () {
-
-console.log(this.selectedTask);
-
+      console.log(this.selectedTask);
+      
       await db.collection(firebase.auth().currentUser.email).doc(this.selectedTask).update({
         title: this.title
       })
