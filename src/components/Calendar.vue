@@ -1,5 +1,25 @@
 <template>
   <div class="demo-app">
+
+<div id='external-events'>
+  <p>
+    <strong>Draggable Events</strong>
+  </p>
+  <div class='fc-event'>My Event 1</div>
+  <div class='fc-event'>My Event 2</div>
+  <div class='fc-event'>My Event 3</div>
+  <div class='fc-event'>My Event 4</div>
+  <div class='fc-event'>My Event 5</div>
+  <p>
+    <input type='checkbox' id='drop-remove' />
+    <label for='drop-remove'>remove after drop</label>
+  </p>
+</div>
+
+<div id='calendar-container'>
+  <div id='calendar'></div>
+</div>
+
     <FullCalendar
       class="demo-app-calendar"
       ref="fullCalendar"
@@ -20,9 +40,14 @@
       @eventResize="updateEvent"
       @eventReceive="updateEvent"
 
+      @eventRender="eventRender"
+
       @eventClick="eventClick"
 
     />
+
+
+
   </div>
 </template>
 
@@ -35,10 +60,12 @@ import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import { BPopover } from 'bootstrap-vue'
 
 Vue.use(moment);
 
 export default {
+ 
   components: {
     FullCalendar // make the <FullCalendar> tag available
   },
@@ -82,6 +109,27 @@ mounted() {
       })
       this.calendarEvents = calendarEvents
      },
+
+      eventRender: function (args) {
+    //console.log(args)
+    let titleStr = args.event.title
+    let contentStr = args.event._def.extendedProps.description
+
+    console.log(args)
+
+    new BPopover({propsData: {
+      title: titleStr,
+      content: contentStr,
+      placement: 'auto',
+      boundary: 'scrollParent',
+      boundaryPadding: 5,
+      delay: 0,
+      offset: 0,
+      triggers: 'hover',
+      html: true,
+      target: args.el,
+    }}).$mount()
+  },
 
      eventClick(arg) {
         console.log(arg.event.start)
