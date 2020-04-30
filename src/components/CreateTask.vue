@@ -7,6 +7,13 @@
             <label for="titleBox">Title and Date (Required)</label>
             <b-form-input id="titleBox" type=text name="title" v-model="title" placeholder="Create Task" class="textbox"></b-form-input>
                 <b-form-datepicker id="example-datepicker" v-model="start" class="mb-2"></b-form-datepicker>   
+                <b-form-textarea
+      id="textarea"
+      v-model="description"
+      placeholder="Enter description (optional)..."
+      rows="3"
+      max-rows="6"
+    ></b-form-textarea>
                     <b-container class="bv-example-row">
                         <b-row>
                             <b-col>
@@ -93,7 +100,7 @@ mounted() {
           title: this.title,
           start: this.start,
           end: this.endTime,
-          description: 'hello',
+          description: this.description,
           backgroundColor: this.priority
         })
       }
