@@ -14,22 +14,22 @@
       rows="3"
       max-rows="6"
     ></b-form-textarea>
-                    <b-container class="bv-example-row">
-                        <b-row>
-                            <b-col>
-                                <label for="timePickerStart">Start</label>
-                                <b-form-timepicker class="timePick" id="timePickerStart" v-model="startTime" locale="en"></b-form-timepicker> 
-                            </b-col>
-                            <b-col>
-                                <label for="timePickerEnd">End</label>
-                                <b-form-timepicker class="timePick" id="timePickerEnd" v-model="endTime" locale="en"></b-form-timepicker>  
-                            </b-col>
-                        </b-row>
-                    </b-container>
-                <b-form-checkbox class="pri" size="lg" type="checkbox" name="priority" v-model="priority" true-value="yes">
-                    High Priority
-                </b-form-checkbox>
-            <input id="subBtn" type="submit" value="Submit" class="btn">
+            <b-container class="bv-example-row">
+                <b-row>
+                     <b-col>
+                         <label for="timePickerStart">Start</label>
+                         <b-form-timepicker class="timePick" id="timePickerStart" v-model="startTime" locale="en"></b-form-timepicker> 
+                     </b-col>
+                    <b-col>
+                         <label for="timePickerEnd">End</label>
+                         <b-form-timepicker class="timePick" id="timePickerEnd" v-model="endTime" locale="en"></b-form-timepicker>  
+                    </b-col>
+                 </b-row>
+              </b-container>
+          <b-form-checkbox class="pri" size="lg" type="checkbox" name="priority" v-model="priority" true-value="yes">
+             High Priority
+         </b-form-checkbox>
+     <input id="subBtn" type="submit" value="Submit" class="btn">
         </form>
         </b-modal>
     </div>
