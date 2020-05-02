@@ -1,75 +1,75 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
-import firebase from 'firebase';
+import Vue from "vue";
+import Router from "vue-router";
+import Home from "./views/Home.vue";
+import firebase from "firebase";
 
-Vue.use(Router)
+Vue.use(Router);
 
 let router = new Router({
   routes: [
     {
-      path: '/',
-      name: 'home',
+      path: "/",
+      name: "home",
       component: Home,
       meta: {
-        requiresAuth: true
-      }
+        requiresAuth: true,
+      },
     },
 
     {
-      path: '/login',
-      name: 'login',
-      component: () => import('./components/Login.vue'),
+      path: "/login",
+      name: "login",
+      component: () => import("./components/Login.vue"),
       meta: {
-        requiresGuest: true
-      }
+        requiresGuest: true,
+      },
     },
 
     {
-      path: '/register',
-      name: 'register',
-      component: () => import('./components/Register.vue'),
+      path: "/register",
+      name: "register",
+      component: () => import("./components/Register.vue"),
       meta: {
-        requiresGuest: true
-      }
+        requiresGuest: true,
+      },
     },
 
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('./views/About.vue'),
+      path: "/about",
+      name: "about",
+      component: () => import("./views/About.vue"),
       meta: {
-        requiresAuth: true
-      }
-    }
-  ]
+        requiresAuth: true,
+      },
+    },
+  ],
 });
 
 router.beforeEach((to, from, next) => {
   // Check for requiresAuth guard
-  if (to.matched.some(record => record.meta.requiresAuth)) {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
     // Check if NO logged user
     if (!firebase.auth().currentUser) {
       // Go to login
       next({
-        path: '/login',
+        path: "/login",
         query: {
-          redirect: to.fullPath
-        }
+          redirect: to.fullPath,
+        },
       });
     } else {
       // Proceed to route
       next();
     }
-  } else if (to.matched.some(record => record.meta.requiresGuest)) {
+  } else if (to.matched.some((record) => record.meta.requiresGuest)) {
     // Check if NO logged user
     if (firebase.auth().currentUser) {
       // Go to login
       next({
-        path: '/',
+        path: "/",
         query: {
-          redirect: to.fullPath
-        }
+          redirect: to.fullPath,
+        },
       });
     } else {
       // Proceed to route

@@ -1,122 +1,140 @@
 <template>
-    <div>
-        <b-button v-b-modal.modal-1>Create Event</b-button>
-        <b-modal id="modal-1" title="Create Task" ok-only hide-footer="true">
-  
-        <form @submit="addEvent">
-            <label for="titleBox">Title and Date (Required)</label>
-            <b-form-input id="titleBox" type=text name="title" v-model="title" placeholder="Create Task" class="textbox"></b-form-input>
-                <b-form-datepicker id="example-datepicker" v-model="start" class="mb-2"></b-form-datepicker>   
-                <b-form-textarea
-      id="textarea"
-      v-model="description"
-      placeholder="Enter description (optional)..."
-      rows="3"
-      max-rows="6"
-    ></b-form-textarea>
-            <b-container class="bv-example-row">
-                <b-row>
-                     <b-col>
-                         <label for="timePickerStart">Start</label>
-                         <b-form-timepicker class="timePick" id="timePickerStart" v-model="startTime" locale="en"></b-form-timepicker> 
-                     </b-col>
-                    <b-col>
-                         <label for="timePickerEnd">End</label>
-                         <b-form-timepicker class="timePick" id="timePickerEnd" v-model="endTime" locale="en"></b-form-timepicker>  
-                    </b-col>
-                 </b-row>
-              </b-container>
-          <b-form-checkbox class="pri" size="lg" type="checkbox" name="priority" v-model="priority" true-value="yes">
-             High Priority
-         </b-form-checkbox>
-     <input id="subBtn" type="submit" value="Submit" class="btn">
-        </form>
-        </b-modal>
-    </div>
+  <div>
+    <b-button v-b-modal.modal-1>Create Event</b-button>
+    <b-modal id="modal-1" title="Create Task" ok-only hide-footer="true">
+      <form @submit="addEvent">
+        <label for="titleBox">Title and Date (Required)</label>
+        <b-form-input
+          id="titleBox"
+          type="text"
+          name="title"
+          v-model="title"
+          placeholder="Create Task"
+          class="textbox"
+        ></b-form-input>
+        <b-form-datepicker
+          id="example-datepicker"
+          v-model="start"
+          class="mb-2"
+        ></b-form-datepicker>
+        <b-form-textarea
+          id="textarea"
+          v-model="description"
+          placeholder="Enter description (optional)..."
+          rows="3"
+          max-rows="6"
+        ></b-form-textarea>
+        <b-container class="bv-example-row">
+          <b-row>
+            <b-col>
+              <label for="timePickerStart">Start</label>
+              <b-form-timepicker
+                class="timePick"
+                id="timePickerStart"
+                v-model="startTime"
+                locale="en"
+              ></b-form-timepicker>
+            </b-col>
+            <b-col>
+              <label for="timePickerEnd">End</label>
+              <b-form-timepicker
+                class="timePick"
+                id="timePickerEnd"
+                v-model="endTime"
+                locale="en"
+              ></b-form-timepicker>
+            </b-col>
+          </b-row>
+        </b-container>
+        <b-form-checkbox
+          class="pri"
+          size="lg"
+          type="checkbox"
+          name="priority"
+          v-model="priority"
+          true-value="yes"
+        >
+          High Priority
+        </b-form-checkbox>
+        <input id="subBtn" type="submit" value="Submit" class="btn" />
+      </form>
+    </b-modal>
+  </div>
 </template>
 
 <script>
 import Vue from "vue";
-import firebase from 'firebase';
-import { FormDatepickerPlugin } from 'bootstrap-vue'
-import { FormInputPlugin } from 'bootstrap-vue'
-import { FormTimepickerPlugin } from 'bootstrap-vue'
-import { ModalPlugin } from 'bootstrap-vue'
+import firebase from "firebase";
+import { FormDatepickerPlugin } from "bootstrap-vue";
+import { FormInputPlugin } from "bootstrap-vue";
+import { FormTimepickerPlugin } from "bootstrap-vue";
+import { ModalPlugin } from "bootstrap-vue";
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 
-import { db } from "@/main"
+import { db } from "@/main";
 
-Vue.use(FormDatepickerPlugin)
-Vue.use(FormInputPlugin)
-Vue.use(FormTimepickerPlugin)
-Vue.use(ModalPlugin)
+Vue.use(FormDatepickerPlugin);
+Vue.use(FormInputPlugin);
+Vue.use(FormTimepickerPlugin);
+Vue.use(ModalPlugin);
 
 export default {
-    name: "CreateTask",
-    data() {
-        return {
-        title: ''
-        }
-    },
+  name: "CreateTask",
+  data() {
+    return {
+      title: "",
+    };
+  },
 
-   created() {
+  created() {
     if (firebase.auth().currentUser) {
       this.isLoggedIn = true;
       this.currentUser = firebase.auth().currentUser.email;
     }
-  }, 
+  },
 
-mounted() {
-  this.priority = false;
-  console.log(this.priority)
+  mounted() {
+    this.priority = false;
+    console.log(this.priority);
 
-  this.startTime = "00:00:00"
-  this.endTime = "00:00:00"
+    this.startTime = "00:00:00";
+    this.endTime = "00:00:00";
 
+    console.log(this.currentUser);
+  },
 
-  console.log(this.currentUser)
-},
+  methods: {
+    async addEvent() {
+      if (this.start && this.endTime) {
+        this.start = this.start.substring(0, 11) + "T" + this.startTime;
+        this.endTime = this.start.substring(0, 11) + this.endTime;
 
-    methods: {
-         async addEvent () {
-
-             if (this.start && this.endTime) {
-              
-              this.start = this.start.substring(0,11) + "T" + this.startTime
-              this.endTime = this.start.substring(0,11) + this.endTime 
-
-              console.log("start is " + this.start)
-              console.log("end is " + this.endTime)
-
-             }
-    
-          if (this.priority) {
-              this.priority = "red"
-          }
-
-         db.collection(firebase.auth().currentUser.email).add({
-          title: this.title,
-          start: this.start,
-          end: this.endTime,
-          description: this.description,
-          backgroundColor: this.priority
-        })
+        console.log("start is " + this.start);
+        console.log("end is " + this.endTime);
       }
-         }
-    }
+
+      if (this.priority) {
+        this.priority = "red";
+      }
+
+      db.collection(firebase.auth().currentUser.email).add({
+        title: this.title,
+        start: this.start,
+        end: this.endTime,
+        description: this.description,
+        backgroundColor: this.priority,
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
-
 #subBtn {
-    width: 40%;
-margin-left: 30%;
-margin-right: 30%;
+  width: 40%;
+  margin-left: 30%;
+  margin-right: 30%;
 }
-
-
-
-
 </style>

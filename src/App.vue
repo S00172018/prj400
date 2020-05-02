@@ -2,8 +2,8 @@
   <div id="app">
     <v-app>
       <v-content>
-        <Header/>
-        <router-view/>
+        <Header />
+        <router-view />
       </v-content>
     </v-app>
   </div>
@@ -15,12 +15,12 @@ import Header from "./components/layout/Header";
 export default {
   name: "app",
   components: {
-    Header
+    Header,
   },
 
   data: () => ({
     //
-  })
+  }),
 };
 </script>
 

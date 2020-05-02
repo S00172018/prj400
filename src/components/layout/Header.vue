@@ -2,31 +2,34 @@
   <header class="header">
     <h1>PRJ400 Virtual Planner</h1>
     <div id="nav">
-      <router-link class="link" tag="BIconListCheck" to="/">Task Manager</router-link>
-      <router-link class="link" tag="BIconCalendar" to="/about">Task Manager</router-link>
+      <router-link class="link" tag="BIconListCheck" to="/"
+        >Task Manager</router-link
+      >
+      <router-link class="link" tag="BIconCalendar" to="/about"
+        >Task Manager</router-link
+      >
       <!-- <router-link v-if="isLoggedIn" class="link" tag="BIconBoxArrowLeft" v-on:click="logout">Task Manager</router-link> -->
 
- <div id="nav2">
-      <button v-if="isLoggedIn" v-on:click="logout">Logout</button>
-</div>
-
+      <div id="nav2">
+        <button v-if="isLoggedIn" v-on:click="logout">Logout</button>
+      </div>
     </div>
   </header>
 </template>
 
 <script>
 import Vue from "vue";
-import firebase from 'firebase';
+import firebase from "firebase";
 import {
   BootstrapVue,
   BIcon,
   BIconCalendar,
   BIconListCheck,
-  BIconBoxArrowLeft
+  BIconBoxArrowLeft,
 } from "bootstrap-vue";
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 
 Vue.use(BootstrapVue);
 Vue.component("BIcon", BIcon);
@@ -35,11 +38,11 @@ Vue.component("BIconListCheck", BIconListCheck);
 Vue.component("BIconBoxArrowLeft", BIconBoxArrowLeft);
 
 export default {
-  name: 'Header',
+  name: "Header",
   data() {
     return {
       isLoggedIn: false,
-      currentUser: false
+      currentUser: false,
     };
   },
   created() {
@@ -49,15 +52,15 @@ export default {
     }
   },
   methods: {
-    logout: function() {
+    logout: function () {
       firebase
         .auth()
         .signOut()
         .then(() => {
           this.$router.go({ path: this.$router.path });
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

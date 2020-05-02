@@ -1,26 +1,31 @@
 <template>
-    <div class="card" align="left" v-bind:class="{'task-complete':todo.completed,
-    'task-priority':todo.highPriority, 'selected':todo.selected}">
-   <p id="text"> 
-       <input type="checkbox" v-on:change="selected">      
-        {{todo.title}}
-        <!-- <button @click="$emit('delete-item', todo.id)" class="delete">Delete</button> -->
-  </p>
-    </div>
+  <div
+    class="card"
+    align="left"
+    v-bind:class="{
+      'task-complete': todo.completed,
+      'task-priority': todo.highPriority,
+      selected: todo.selected,
+    }"
+  >
+    <p id="text">
+      <input type="checkbox" v-on:change="selected" />
+      {{ todo.title }}
+      <!-- <button @click="$emit('delete-item', todo.id)" class="delete">Delete</button> -->
+    </p>
+  </div>
 </template>
 
 <script>
-
-
 export default {
-    name:"TodoItem",
-    props:["todo"],
-    methods: {
-        selected() {
-            this.todo.selected = !this.todo.selected;
-        }
-    }
-}
+  name: "TodoItem",
+  props: ["todo"],
+  methods: {
+    selected() {
+      this.todo.selected = !this.todo.selected;
+    },
+  },
+};
 </script>
 
 <style scoped>

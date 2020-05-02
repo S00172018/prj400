@@ -1,43 +1,39 @@
 <template>
   <div class="container" align="center">
     <h1>Task Manager</h1>
-    <CreateTask v-on:create-task="createTask"/>
+    <CreateTask v-on:create-task="createTask" />
     <h2>Events</h2>
-    <Todos v-bind:todos="todos" v-on:delete-item="deleteItem"/>
+    <Todos v-bind:todos="todos" v-on:delete-item="deleteItem" />
   </div>
 </template>
 
 <script>
-import Todos from '../components/Todos';
-import CreateTask from '../components/CreateTask';
+import Todos from "../components/Todos";
+import CreateTask from "../components/CreateTask";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     Todos,
-    CreateTask
+    CreateTask,
   },
   data() {
     return {
-      todos: [
-       
-      ]
-    }
+      todos: [],
+    };
   },
   methods: {
     deleteItem(id) {
-      this.todos = this.todos.filter(todo => todo.id !== id);
+      this.todos = this.todos.filter((todo) => todo.id !== id);
     },
     createTask(newTask) {
       this.todos = [...this.todos, newTask];
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>
-
-
 h1 {
   font-weight: bolder;
   font: 100;
@@ -65,5 +61,4 @@ body {
 .btn:hover {
   background: darkgray;
 }
-
 </style>

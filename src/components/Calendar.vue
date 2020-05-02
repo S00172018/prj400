@@ -1,34 +1,33 @@
 <template>
   <div class="demo-app">
+    <div id="external-events">
+      <p>
+        <strong>Draggable Events</strong>
+      </p>
+      <div class="fc-event">My Event 1</div>
+      <div class="fc-event">My Event 2</div>
+      <div class="fc-event">My Event 3</div>
+      <div class="fc-event">My Event 4</div>
+      <div class="fc-event">My Event 5</div>
+      <p>
+        <input type="checkbox" id="drop-remove" />
+        <label for="drop-remove">remove after drop</label>
+      </p>
+    </div>
 
-<div id='external-events'>
-  <p>
-    <strong>Draggable Events</strong>
-  </p>
-  <div class='fc-event'>My Event 1</div>
-  <div class='fc-event'>My Event 2</div>
-  <div class='fc-event'>My Event 3</div>
-  <div class='fc-event'>My Event 4</div>
-  <div class='fc-event'>My Event 5</div>
-  <p>
-    <input type='checkbox' id='drop-remove' />
-    <label for='drop-remove'>remove after drop</label>
-  </p>
-</div>
-
-<div id='calendar-container'>
-  <div id='calendar'></div>
-</div>
+    <div id="calendar-container">
+      <div id="calendar"></div>
+    </div>
 
     <FullCalendar
       class="demo-app-calendar"
       ref="fullCalendar"
       defaultView="timeGridWeek"
-      eventTextColor="white"     
+      eventTextColor="white"
       :header="{
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
       }"
       :plugins="calendarPlugins"
       :weekends="calendarWeekends"
@@ -39,127 +38,124 @@
       @eventDrop="updateEvent"
       @eventResize="updateEvent"
       @eventReceive="updateEvent"
-
       @eventRender="eventRender"
-
       @eventClick="eventClick"
-
     />
-
-
-
   </div>
 </template>
 
 <script>
 import Vue from "vue";
-import firebase from 'firebase';
-import { db } from "@/main"
-import moment from 'moment';
+import firebase from "firebase";
+import { db } from "@/main";
+import moment from "moment";
 import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { BPopover } from 'bootstrap-vue'
+import { BPopover } from "bootstrap-vue";
 
 Vue.use(moment);
 
 export default {
- 
   components: {
-    FullCalendar // make the <FullCalendar> tag available
+    FullCalendar, // make the <FullCalendar> tag available
   },
-  data: () => ({ 
-      calendarPlugins: [
-        // plugins must be defined in the JS
-        dayGridPlugin,
-        timeGridPlugin,
-        interactionPlugin // needed for dateClick
-      ],
-      calendarWeekends: true,
-      calendarEvents: [],
+  data: () => ({
+    calendarPlugins: [
+      // plugins must be defined in the JS
+      dayGridPlugin,
+      timeGridPlugin,
+      interactionPlugin, // needed for dateClick
+    ],
+    calendarWeekends: true,
+    calendarEvents: [],
 
-      title: null,
-      start: null,
-      end: null,
-      selectedEvent: {},
-      selectedElement: null,
-      currentlyEditing: null,
+    title: null,
+    start: null,
+    end: null,
+    selectedEvent: {},
+    selectedElement: null,
+    currentlyEditing: null,
 
-      dropAccept: '.div.list-group-item',
-      drop: function() {
-      console.log('div.list-group-item');
-    }
-  
+    dropAccept: ".div.list-group-item",
+    drop: function () {
+      console.log("div.list-group-item");
+    },
   }),
 
-mounted() {
-  this.getEvents();
-},
-
-  methods: {
-    async getEvents () {
-      let snapshot = await db.collection(firebase.auth().currentUser.email).get()
-      const calendarEvents = []
-      snapshot.forEach(doc => {
-        let appData = doc.data()
-        appData.id = doc.id
-        calendarEvents.push(appData)
-        console.log(doc.id, " => ", doc.data());
-      })
-      this.calendarEvents = calendarEvents
-     },
-
-      eventRender: function (args) {
-    //console.log(args)
-    let titleStr = args.event.title
-    let contentStr = args.event._def.extendedProps.description
-
-    console.log(args)
-
-    new BPopover({propsData: {
-      title: titleStr,
-      content: contentStr,
-      placement: 'auto',
-      boundary: 'scrollParent',
-      boundaryPadding: 5,
-      delay: 0,
-      offset: 0,
-      triggers: 'hover',
-      html: true,
-      target: args.el,
-    }}).$mount()
+  mounted() {
+    this.getEvents();
   },
 
-     eventClick(arg) {
-        console.log(arg.event.start)
-        var start = arg.event.start
-        console.log(start.getUTCHours());
+  methods: {
+    async getEvents() {
+      let snapshot = await db
+        .collection(firebase.auth().currentUser.email)
+        .get();
+      const calendarEvents = [];
+      snapshot.forEach((doc) => {
+        let appData = doc.data();
+        appData.id = doc.id;
+        calendarEvents.push(appData);
+        console.log(doc.id, " => ", doc.data());
+      });
+      this.calendarEvents = calendarEvents;
+    },
 
-        var newStart = moment(start).format();
-        console.log(newStart)
-        
-     },
+    eventRender: function (args) {
+      //console.log(args)
+      let titleStr = args.event.title;
+      let contentStr = args.event._def.extendedProps.description;
 
-     async updateEvent (arg) {
+      console.log(args);
 
-      await db.collection(firebase.auth().currentUser.email).doc(arg.event.id).update({
-        start: moment(arg.event.start).format(),
-        end: moment(arg.event.end).format()
-      })
-      console.log("The ID is " + arg.event.id + "and the start is " + arg.event.start);
+      new BPopover({
+        propsData: {
+          title: titleStr,
+          content: contentStr,
+          placement: "auto",
+          boundary: "scrollParent",
+          boundaryPadding: 5,
+          delay: 0,
+          offset: 0,
+          triggers: "hover",
+          html: true,
+          target: args.el,
+        },
+      }).$mount();
+    },
+
+    eventClick(arg) {
+      console.log(arg.event.start);
+      var start = arg.event.start;
+      console.log(start.getUTCHours());
+
+      var newStart = moment(start).format();
+      console.log(newStart);
+    },
+
+    async updateEvent(arg) {
+      await db
+        .collection(firebase.auth().currentUser.email)
+        .doc(arg.event.id)
+        .update({
+          start: moment(arg.event.start).format(),
+          end: moment(arg.event.end).format(),
+        });
+      console.log(
+        "The ID is " + arg.event.id + "and the start is " + arg.event.start
+      );
     },
 
     getColour(event) {
-      if (event.priority == true)
-      return "red"
-    }
-     
+      if (event.priority == true) return "red";
+    },
   },
 };
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 // you must include each plugins' css
 // paths prefixed with ~ signify node_modules
 @import "~@fullcalendar/core/main.css";
@@ -176,5 +172,5 @@ mounted() {
 }
 calendarEvents {
   color: white;
-  }
+}
 </style>
