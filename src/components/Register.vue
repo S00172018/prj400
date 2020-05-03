@@ -36,14 +36,14 @@ export default {
     };
   },
   methods: {
+    //Firebase registartion function
     register: function (e) {
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(
           (user) => {
-            // console.log(user);
-            alert(`Account Created for ${user.user.email}`);
+            alert(`Welcome ${user.user.email}`);
             this.$router.go({ path: this.$router.path });
           },
           (err) => {

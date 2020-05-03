@@ -4,8 +4,6 @@
     <div id="nav">
       <router-link class="link" tag="BIconListCheck" to="/"></router-link>
       <router-link class="link" tag="BIconCalendar" to="/about"></router-link>
-      <!-- <router-link v-if="isLoggedIn" class="link" tag="BIconBoxArrowLeft" v-on:click="logout">Task Manager</router-link> -->
-
       <div id="nav2">
         <button v-if="isLoggedIn" v-on:click="logout">Logout</button>
       </div>
@@ -38,13 +36,16 @@ export default {
       currentUser: false,
     };
   },
+  //Sets cuurent user equal to email of user
   created() {
     if (firebase.auth().currentUser) {
       this.isLoggedIn = true;
       this.currentUser = firebase.auth().currentUser.email;
     }
   },
+
   methods: {
+    //Triggers firebase logout function
     logout: function () {
       firebase
         .auth()

@@ -23,9 +23,11 @@ export default {
     };
   },
   methods: {
+    //Deletes task based on id
     deleteItem(id) {
       this.todos = this.todos.filter((todo) => todo.id !== id);
     },
+    //Creates new task
     createTask(newTask) {
       this.todos = [...this.todos, newTask];
     },

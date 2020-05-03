@@ -34,13 +34,14 @@ export default {
     };
   },
   methods: {
+    //Firebase login function
     login: function (e) {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(
           (user) => {
-            alert(`You are logged in as ${user.user.email}`);
+            alert(`Welcome ${user.user.email}!`);
             this.$router.go({ path: this.$router.path });
           },
           (err) => {

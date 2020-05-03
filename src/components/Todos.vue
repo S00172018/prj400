@@ -71,6 +71,7 @@ export default {
     console.log(this.tasks);
   },
 
+  //Populates the list with events in the database
   methods: {
     async getEvents() {
       let snapshot = await db
@@ -86,6 +87,7 @@ export default {
       this.tasks = tasks;
     },
 
+    //deletes an event from the database
     async deleteEvent(event) {
       await db
         .collection(firebase.auth().currentUser.email)
@@ -94,11 +96,13 @@ export default {
       this.getEvents();
     },
 
+    //Sets the selected task
     sendInfo(task) {
       this.selectedTask = task;
       console.log(this.selectedTask);
     },
 
+    //Updates event data in the database
     async updateEvent() {
       console.log(this.selectedTask);
 
@@ -111,6 +115,7 @@ export default {
       this.getEvents();
     },
 
+    //Sets colour based on priority
     colour(task) {
       if (task.backgroundColor == "red") {
         return "danger";

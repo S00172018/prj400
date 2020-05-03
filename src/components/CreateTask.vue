@@ -69,10 +69,6 @@ import { FormDatepickerPlugin } from "bootstrap-vue";
 import { FormInputPlugin } from "bootstrap-vue";
 import { FormTimepickerPlugin } from "bootstrap-vue";
 import { ModalPlugin } from "bootstrap-vue";
-
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-vue/dist/bootstrap-vue.css";
-
 import { db } from "@/main";
 
 Vue.use(FormDatepickerPlugin);
@@ -88,6 +84,7 @@ export default {
     };
   },
 
+  //Sets currentuser value to the user email
   created() {
     if (firebase.auth().currentUser) {
       this.isLoggedIn = true;
@@ -95,6 +92,7 @@ export default {
     }
   },
 
+  //Sets intitial values
   mounted() {
     this.priority = false;
     console.log(this.priority);
@@ -106,6 +104,7 @@ export default {
   },
 
   methods: {
+    //Combines date and time values in order to work with API
     async addEvent() {
       if (this.start && this.endTime) {
         this.start = this.start.substring(0, 11) + "T" + this.startTime;
@@ -115,10 +114,12 @@ export default {
         console.log("end is " + this.endTime);
       }
 
+      //Checks priority -> changes colour based on value
       if (this.priority) {
         this.priority = "red";
       }
 
+      //Submits values to database
       db.collection(firebase.auth().currentUser.email).add({
         title: this.title,
         start: this.start,

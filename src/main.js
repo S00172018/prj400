@@ -5,6 +5,9 @@ import vuetify from "./plugins/vuetify";
 import firebase from "firebase/app";
 import "firebase/firestore";
 
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+
 Vue.config.productionTip = false;
 
 firebase.initializeApp({
