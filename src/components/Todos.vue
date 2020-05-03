@@ -5,6 +5,7 @@
         {{ task.title }} │ {{ task.start.substring(0, 10) }}
         <b-button
           class="float-right"
+          id="cal-modal"
           pill
           variant="outline-danger"
           size="sm"
