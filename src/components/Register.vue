@@ -2,14 +2,15 @@
   <div>
     <form @submit="register">
       <h2>Register</h2>
-      <label for="email">Email</label>
-      <b-form-input
-        type="email"
-        id="email"
-        v-validate="'required'"
-        v-model="email"
-        placeholder="johnsmith@example.com"
-      ></b-form-input>
+      <b-form-group label="Email">
+        <b-form-input
+          type="email"
+          id="email"
+          v-validate="'required'"
+          v-model="email"
+          placeholder="johnsmith@example.com"
+        ></b-form-input>
+      </b-form-group>
       <b-form-group label="Password">
         <b-form-input
           v-model="password"
