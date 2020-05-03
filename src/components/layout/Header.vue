@@ -2,12 +2,8 @@
   <header class="header">
     <h1>PRJ400 Virtual Planner</h1>
     <div id="nav">
-      <router-link class="link" tag="BIconListCheck" to="/"
-        >Task Manager</router-link
-      >
-      <router-link class="link" tag="BIconCalendar" to="/about"
-        >Task Manager</router-link
-      >
+      <router-link class="link" tag="BIconListCheck" to="/"></router-link>
+      <router-link class="link" tag="BIconCalendar" to="/about"></router-link>
       <!-- <router-link v-if="isLoggedIn" class="link" tag="BIconBoxArrowLeft" v-on:click="logout">Task Manager</router-link> -->
 
       <div id="nav2">
@@ -27,9 +23,6 @@ import {
   BIconListCheck,
   BIconBoxArrowLeft,
 } from "bootstrap-vue";
-
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-vue/dist/bootstrap-vue.css";
 
 Vue.use(BootstrapVue);
 Vue.component("BIcon", BIcon);
