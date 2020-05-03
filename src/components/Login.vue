@@ -2,19 +2,21 @@
   <div>
     <form @submit="login">
       <h2>Login</h2>
-      <label for="email">Email</label>
-      <b-form-input
-        type="email"
-        id="email"
-        v-model="email"
-        placeholder="johnsmith@example.com"
-      ></b-form-input>
-      <label for="password">Password</label>
-      <b-form-input
-        type="password"
-        id="password"
-        v-model="password"
-      ></b-form-input>
+      <b-form-group label="Email">
+        <b-form-input
+          type="email"
+          id="email"
+          v-model="email"
+          placeholder="johnsmith@example.com"
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group label="Password">
+        <b-form-input
+          type="password"
+          id="password"
+          v-model="password"
+        ></b-form-input>
+      </b-form-group>
       <p></p>
       <input id="subBtn" type="submit" value="Submit" class="btn" />
     </form>
