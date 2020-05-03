@@ -6,15 +6,21 @@
       <b-form-input
         type="email"
         id="email"
+        v-validate="'required'"
         v-model="email"
         placeholder="johnsmith@example.com"
       ></b-form-input>
-      <label for="password">Password</label>
-      <b-form-input
-        type="password"
-        id="password"
-        v-model="password"
-      ></b-form-input>
+      <b-form-group label="Password">
+        <b-form-input
+          v-model="password"
+          type="password"
+          placeholder="Enter password"
+        >
+        </b-form-input>
+      </b-form-group>
+      <b-form-group label="Confirm Password">
+        <b-form-input v-model="confirmation" type="password"></b-form-input>
+      </b-form-group>
       <p></p>
       <input id="subBtn" type="submit" value="Submit" class="btn" />
     </form>
@@ -26,7 +32,11 @@
 </template>
 
 <script>
+import Vue from "vue";
+import Vuelidate from "vuelidate";
 import firebase from "firebase";
+Vue.use(Vuelidate);
+
 export default {
   name: "register",
   data: function () {
@@ -38,6 +48,10 @@ export default {
   methods: {
     //Firebase registartion function
     register: function (e) {
+      if (this.password !== this.confirmation) {
+        alert("Passwords do not match");
+        this.errors.push();
+      }
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
